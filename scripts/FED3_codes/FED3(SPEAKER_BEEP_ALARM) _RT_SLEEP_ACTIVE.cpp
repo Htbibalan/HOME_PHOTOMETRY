@@ -561,11 +561,11 @@ void FED3::Alarm() {
     tone(BUZZER, 1000, 200); // Beep at 2000 Hz for 200 milliseconds
     delay(800); // Wait for 800 milliseconds
     tone(BUZZER, 4000, 200); // Beep again at 2000 Hz for 200 milliseconds
-    delay(10000); // Wait for 10000 milliseconds before repeating
+    delay(10000); // Wait for 800 milliseconds before repeating
   }
 }
 
-//line below generates a morse code sound in case of a jamming
+//line below generate a morse code sound in case of a jamming
 // void FED3::Alarm() {
 //   while (true) {
 //     // H: ....
@@ -1046,199 +1046,150 @@ void FED3::writePelletFile() {
   Pelletfile.close();
 }
 
-//Write to SD card
 void FED3::logdata() {
-  if (EnableSleep==true){
-    digitalWrite (MOTOR_ENABLE, LOW);  //Disable motor driver and neopixel
-  }
-  SD.begin(cardSelect, SD_SCK_MHZ(4));
-  
-  //fix filename (the .CSV extension can become corrupted) and open file
-  filename[19] = '.';
-  filename[20] = 'C';
-  filename[21] = 'S';
-  filename[22] = 'V';
-  logfile = SD.open(filename, FILE_WRITE);
+    if (EnableSleep == true) {
+        digitalWrite(MOTOR_ENABLE, LOW);  // Disable motor driver and neopixel
+    }
+    SD.begin(cardSelect, SD_SCK_MHZ(4));
 
-  //if FED3 cannot open file put SD card icon on screen 
-  display.fillRect (68, 1, 15, 22, WHITE); //clear a space
-  if ( ! logfile ) {
-  
-    //draw SD card icon
-    display.drawRect (70, 2, 11, 14, BLACK);
-    display.drawRect (69, 6, 2, 10, BLACK);
-    display.fillRect (70, 7, 4, 8, WHITE);
-    display.drawRect (72, 4, 1, 3, BLACK);
-    display.drawRect (74, 4, 1, 3, BLACK);
-    display.drawRect (76, 4, 1, 3, BLACK);
-    display.drawRect (78, 4, 1, 3, BLACK);
-    //exclamation point
-    display.fillRect (72, 6, 6, 16, WHITE);
-    display.setCursor(74, 16);
-    display.setTextSize(2);
-    display.setFont(&Org_01);
-    display.print("!");
-    display.setFont(&FreeSans9pt7b);
-    display.setTextSize(1);
-  }
-  
-  /////////////////////////////////
-  // Log data and time 
-  /////////////////////////////////
-  DateTime now = rtc.now();
-  logfile.print(now.month());
-  logfile.print("/");
-  logfile.print(now.day());
-  logfile.print("/");
-  logfile.print(now.year());
-  logfile.print(" ");
-  logfile.print(now.hour());
-  logfile.print(":");
-  if (now.minute() < 10)
-    logfile.print('0');      // Trick to add leading zero for formatting
-  logfile.print(now.minute());
-  logfile.print(":");
-  if (now.second() < 10)
-    logfile.print('0');      // Trick to add leading zero for formatting
-  logfile.print(now.second());
-  logfile.print(",");
-    
-  /////////////////////////////////
-  // Log temp and humidity
-  /////////////////////////////////
-  if (tempSensor == true){
-    sensors_event_t humidity, temp;
-    aht.getEvent(&humidity, &temp);// populate temp and humidity objects with fresh data
-    logfile.print (temp.temperature);
-    logfile.print(",");
-    logfile.print (humidity.relative_humidity);
-    logfile.print(",");
-  }
+    // Fix filename (the .CSV extension can become corrupted) and open file
+    filename[19] = '.';
+    filename[20] = 'C';
+    filename[21] = 'S';
+    filename[22] = 'V';
+    logfile = SD.open(filename, FILE_WRITE);
 
-  /////////////////////////////////
-  // Log library version and Sketch identifier text
-  /////////////////////////////////
-  logfile.print(VER); // Print library version
-  logfile.print(",");
-  
-  /////////////////////////////////
-  // Log Trial Info
-  /////////////////////////////////
-  logfile.print(sessiontype);  //print Sketch identifier
-  logfile.print(",");
-  
-  /////////////////////////////////
-  // Log FED device number
-  /////////////////////////////////
-  logfile.print(FED); // 
-  logfile.print(",");
+    // If FED3 cannot open file put SD card icon on screen 
+    display.fillRect(68, 1, 15, 22, WHITE); // Clear a space
+    if (!logfile) {
+        // Draw SD card icon
+        display.drawRect(70, 2, 11, 14, BLACK);
+        display.drawRect(69, 6, 2, 10, BLACK);
+        display.fillRect(70, 7, 4, 8, WHITE);
+        display.drawRect(72, 4, 1, 3, BLACK);
+        display.drawRect(74, 4, 1, 3, BLACK);
+        display.drawRect(76, 4, 1, 3, BLACK);
+        display.drawRect(78, 4, 1, 3, BLACK);
+        // Exclamation point
+        display.fillRect(72, 6, 6, 16, WHITE);
+        display.setCursor(74, 16);
+        display.setTextSize(2);
+        display.setFont(&Org_01);
+        display.print("!");
+        display.setFont(&FreeSans9pt7b);
+        display.setTextSize(1);
+    }
 
-  /////////////////////////////////
-  // Log battery voltage
-  /////////////////////////////////
-  ReadBatteryLevel();
-  logfile.print(measuredvbat); // 
-  logfile.print(",");
+    // Prepare data for logging and serial output
+    String logData = "";
 
-  /////////////////////////////////
-  // Log motor turns
-  /////////////////////////////////
-  if (Event != "Pellet"){
-    logfile.print(sqrt (-1)); // print NaN if it's not a pellet Event
-    logfile.print(",");
-  }
-  else {
-    logfile.print(numMotorTurns+1); // Print the number of attempts to dispense a pellet
-    logfile.print(",");
-  }
-  /////////////////////////////////
-  // Log FR ratio
-  /////////////////////////////////
-  logfile.print(FR);
-  logfile.print(",");
+    /////////////////////////////////
+    // Log date and time 
+    /////////////////////////////////
+    DateTime now = rtc.now();
+    logData += String(now.month()) + "/" + String(now.day()) + "/" + String(now.year()) + " ";
+    logData += (now.hour() < 10 ? "0" : "") + String(now.hour()) + ":";
+    logData += (now.minute() < 10 ? "0" : "") + String(now.minute()) + ":";
+    logData += (now.second() < 10 ? "0" : "") + String(now.second()) + ",";
 
-  /////////////////////////////////
-  // Log event type (pellet, right, left)
-  /////////////////////////////////
-  logfile.print(Event); 
-  logfile.print(",");
+    /////////////////////////////////
+    // Log temp and humidity
+    /////////////////////////////////
+    if (tempSensor == true) {
+        sensors_event_t humidity, temp;
+        aht.getEvent(&humidity, &temp); // Populate temp and humidity objects with fresh data
+        logData += String(temp.temperature) + "," + String(humidity.relative_humidity) + ",";
+    }
 
-  /////////////////////////////////
-  // Log Active poke side (left, right)
-  /////////////////////////////////
-  if (activePoke == 0)  logfile.print("Right"); //
-  if (activePoke == 1)  logfile.print("Left"); //
-  logfile.print(",");
+    /////////////////////////////////
+    // Log library version and Sketch identifier text
+    /////////////////////////////////
+    logData += String(VER) + ",";
+    logData += sessiontype + ",";
+    logData += String(FED) + ",";
 
-  /////////////////////////////////
-  // Log data (leftCount, RightCount, Pellets
-  /////////////////////////////////
-  logfile.print(LeftCount); // Print Left poke count
-  logfile.print(",");
-    
-  logfile.print(RightCount); // Print Right poke count
-  logfile.print(",");
+    /////////////////////////////////
+    // Log battery voltage
+    /////////////////////////////////
+    ReadBatteryLevel();
+    logData += String(measuredvbat) + ",";
 
-  logfile.print(PelletCount); // print Pellet counts
-  logfile.print(",");
+    /////////////////////////////////
+    // Log motor turns
+    /////////////////////////////////
+    if (Event != "Pellet") {
+        logData += "NaN,";
+    } else {
+        logData += String(numMotorTurns + 1) + ",";
+    }
 
-  logfile.print(BlockPelletCount); // print Block Pellet counts
-  logfile.print(",");
+    /////////////////////////////////
+    // Log FR ratio
+    /////////////////////////////////
+    logData += String(FR) + ",";
 
-  /////////////////////////////////
-  // Log pellet retrieval interval
-  /////////////////////////////////
-  if (Event != "Pellet"){
-    logfile.print(sqrt (-1)); // print NaN if it's not a pellet Event
-  }
-  else if (retInterval < 60000 ) {  // only log retrieval intervals below 1 minute (FED should not record any longer than this)
-    logfile.print(retInterval/1000.000); // print interval between pellet dispensing and being taken
-  }
-  else if (retInterval >= 60000) {
-    logfile.print("Timed_out"); // print "Timed_out" if retreival interval is >60s
-  }
-  else {
-    logfile.print("Error"); // print error if value is < 0 (this shouldn't ever happen)
-  }
-  logfile.print(",");
-  
-  
-  /////////////////////////////////
-  // Inter-Pellet-Interval
-  /////////////////////////////////
-  if ((Event != "Pellet") or (PelletCount < 2)){
-    logfile.print(sqrt (-1)); // print NaN if it's not a pellet Event
-  }
-  else {
-    logfile.print (interPelletInterval);
-  }
-  logfile.print(",");
-      
-  /////////////////////////////////
-  // Poke duration
-  /////////////////////////////////
-  if (Event == "Pellet"){
-    logfile.println(sqrt (-1)); // print NaN 
-  }
+    /////////////////////////////////
+    // Log event type (pellet, right, left)
+    /////////////////////////////////
+    logData += Event + ",";
 
-  else if ((Event == "Left") or (Event == "LeftShort") or (Event == "LeftWithPellet") or (Event == "LeftinTimeout") or (Event == "LeftDuringDispense")) {  // 
-    logfile.println(leftInterval/1000.000); // print left poke timing
-  }
+    /////////////////////////////////
+    // Log Active poke side (left, right)
+    /////////////////////////////////
+    logData += (activePoke == 0 ? String("Right") : String("Left")) + ",";
 
-  else if ((Event == "Right") or (Event == "RightShort") or (Event == "RightWithPellet") or (Event == "RightinTimeout") or (Event == "RightDuringDispense")) {  // 
-    logfile.println(rightInterval/1000.000); // print left poke timing
-  }
-  
-  else {
-    logfile.println(sqrt (-1)); // print NaN 
-  }
+    /////////////////////////////////
+    // Log data (leftCount, RightCount, Pellets)
+    /////////////////////////////////
+    logData += String(LeftCount) + "," + String(RightCount) + "," + String(PelletCount) + "," + String(BlockPelletCount) + ",";
 
-  /////////////////////////////////
-  // logfile.flush write to the SD card
-  /////////////////////////////////
-  Blink(GREEN_LED, 25, 2);
-  logfile.flush();
-  logfile.close();
+    /////////////////////////////////
+    // Log pellet retrieval interval
+    /////////////////////////////////
+    if (Event != "Pellet") {
+        logData += "NaN,";
+    } else if (retInterval < 60000) {
+        logData += String(retInterval / 1000.000) + ",";
+    } else if (retInterval >= 60000) {
+        logData += "Timed_out,";
+    } else {
+        logData += "Error,";
+    }
+
+    /////////////////////////////////
+    // Inter-Pellet-Interval
+    /////////////////////////////////
+    if ((Event != "Pellet") || (PelletCount < 2)) {
+        logData += "NaN,";
+    } else {
+        logData += String(interPelletInterval) + ",";
+    }
+
+    /////////////////////////////////
+    // Poke duration
+    /////////////////////////////////
+    if (Event == "Pellet") {
+        logData += "NaN";
+    } else if ((Event == "Left") || (Event == "LeftShort") || (Event == "LeftWithPellet") || (Event == "LeftinTimeout") || (Event == "LeftDuringDispense")) {
+        logData += String(leftInterval / 1000.000);
+    } else if ((Event == "Right") || (Event == "RightShort") || (Event == "RightWithPellet") || (Event == "RightinTimeout") || (Event == "RightDuringDispense")) {
+        logData += String(rightInterval / 1000.000);
+    } else {
+        logData += "NaN";
+    }
+
+    // Print the log data to the Serial Monitor
+    Serial.println(logData);
+
+    // Write the log data to the SD card
+    logfile.println(logData);
+
+    /////////////////////////////////
+    // Flush and close logfile
+    /////////////////////////////////
+    Blink(GREEN_LED, 25, 2);
+    logfile.flush();
+    logfile.close();
 }
 
 
