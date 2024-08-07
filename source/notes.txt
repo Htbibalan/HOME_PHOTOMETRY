@@ -1,0 +1,3 @@
+Andrew Hardaway method to sync FED with photometry
+https://hackaday.io/project/106885-feeding-experimentation-device-3-fed3/log/162040-interfacing-fed3-with-bonsai
+
