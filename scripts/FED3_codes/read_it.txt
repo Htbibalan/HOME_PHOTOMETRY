@@ -1,4 +1,0 @@
-Since we need to use the BNC/3.5 mm jack for connection to TDT, we can use the mini speaker on Feather board to generate an alarm sound when needed (i.e. Jamming)
-to do so, you need to replace the FED3(SPEAKER_BEEP_ALARM).cpp with the original one in your Arduino library , which is located at an address like below :
-
-C:\Users\hta031\OneDrive - UiT Office 365\Documents 1\Arduino\libraries\FED3\src
