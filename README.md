@@ -1,4 +1,4 @@
-![Banner Image](https://github.com/Htbibalan/HOME_PHOTOMETRY/tree/main/source/Banner.png)
+![Banner Image](https://github.com/Htbibalan/HOME_PHOTOMETRY/blob/main/source/Banner.PNG)
 
 # Home_Photometry_FED(HPFED)
 * Here I am developing a home-cage photometry recording setup to incorporate [FED3](https://github.com/KravitzLabDevices/FED3/wiki) units with TDT [RZ10](https://www.tdt.com/docs/hardware/rz10-lux-integrated-processor/) photometry system.
@@ -9,7 +9,8 @@
 
 
 ## Arduino approach
-![Arduino](https://github.com/Htbibalan/HOME_PHOTOMETRY/tree/main/source/Slide1.PNG)
+![Arduino](https://github.com/Htbibalan/HOME_PHOTOMETRY/blob/main/source/Slide1.PNG)
 
 ## RbPi Approach
-![RBPI](https://github.com/Htbibalan/HOME_PHOTOMETRY/tree/main/source/Slide2.PNG)
+![RBPI](https://github.com/Htbibalan/HOME_PHOTOMETRY/blob/main/source/Slide2.PNG)
+
