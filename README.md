@@ -1,4 +1,4 @@
-![Banner Image](https://github.com/Htbibalan/HOME_PHOTOMETRY/blob/main/source/Banner.PNG)
+![Banner Image](https://github.com/Htbibalan/HOME_PHOTOMETRY/blob/main/source/Banner.png)
 
 # Home_Photometry_FED(HPFED)
 * Here I am developing a home-cage photometry recording setup to incorporate [FED3](https://github.com/KravitzLabDevices/FED3/wiki) units with TDT [RZ10](https://www.tdt.com/docs/hardware/rz10-lux-integrated-processor/) photometry system.
