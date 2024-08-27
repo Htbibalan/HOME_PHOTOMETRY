@@ -1,0 +1,28 @@
+## The Raspberry Pi 4 Model B - 4 GB RAM
+https://www.electrokit.com/en/raspberry-pi-4-model-b/4gb
+
+## A cover case for the board  maybe?(we could 3D print something, but it is already cheap and designing and printing would probably cost more!)
+https://www.electrokit.com/en/raspberry-pi-4-inbyggnadslada-rod/vit
+
+
+## The power adapter for the board
+https://www.electrokit.com/en/raspberry-pi-4-stromforsorjning-5v-3a-usb-c-vit
+
+## SD card for the board:
+https://www.electrokit.com/en/minneskort-microsdxc-128gb-klass-10-a1
+
+
+## Jumper wires to connect raspberry pi board to db25 breakoutboard
+https://www.elfadistrelec.no/en/jumper-cable-of-40-wires-male-to-female-awg22-velleman-wpa414/p/30260971?ext_cid=shgooaqnono-Shopping-PerformanceMax-CSS&gad_source=1&gclid=CjwKCAjw8rW2BhAgEiwAoRO5rPSryj3k5p8T8V73ak9BMlPEfC4beYDF5v3y66Gtu4eO7EGV2-FF5RoCgv8QAvD_BwE&gclsrc=aw.ds
+
+
+## DB25 breakout board - connector plug (I am a bit unsure what to choose here)
+
+**Do you think using this one from Amazon makes it easy to map the pins?  - - -instead of using a jumper wire connection to a breakout board and then to TDT.**
+
+#### https://www.amazon.com/JUXINICE-Female-Connector-Provided-Terminals/dp/B0CHNPQBQ8/ref=sr_1_3?crid=2OR78V9CIIFG9&dib=eyJ2IjoiMSJ9.yi8Qg4Rj5wWahTUCXJsKgAnKQk_3SQFYZ_B8QfRRd5V8pHj0V4OxDGAj5KCSfbLMn-YADwfM40hr9cPisJgPzwXafPZrragr_EplipRJSqGdi6IUDoTFnUVk0VAi0_aot9ruiePJBJm4pEvt8D9bhZ1MbMfMwwcu3ZXXE-lrJochcbtGk-mPSx4gX2LDumzK5paAzaQJFuXtPuggM7bJzDdVVN1RYlLLHZg9duVD96s.VZK6kxQxmFYSIs7IfyqwNdEzwP57swXu5cxePmbuzlM&dib_tag=se&keywords=db25%2Bpigtail%2Bfemale%2Bjumper%2Bwire%2Bon%2Bend&qid=1724755007&sprefix=db25%2Bpigtail%2Bfemale%2Bjumper%2Bwire%2Bon%2Ben%2Caps%2C204&sr=8-3&th=1
+
+#### https://czh-labs.com/products/czh-labs-slim-right-angle-dsub-db25-male-header-breakout-board-module-d-sub-231?gad_source=1&gclid=CjwKCAjw8rW2BhAgEiwAoRO5rEic1w67dlyraS9dUXNrp32Dhq9PTFB_XoJzjpuoE9zxFm3M3ATWWRoCE30QAvD_BwE
+
+#### https://www.multicom.no/delock-seriell-adapter-db-25-til/cat-p/c/p5398359?gad_source=1&gclid=CjwKCAjw8rW2BhAgEiwAoRO5rKDj3SsBziStjbM7XgD4G3ZDbnNtTQQtALRzAGIcXfvrEBEA31QwJhoCIz0QAvD_BwE
+
