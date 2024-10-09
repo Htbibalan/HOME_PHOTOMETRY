@@ -1,0 +1,6 @@
+Timestamp,Temp,Humidity,Library_Version,Session_type,Device_Number,Battery_Voltage,Motor_Turns,FR,Event,Active_Poke,Left_Poke_Count,Right_Poke_Count,Pellet_Count,Block_Pellet_Count,Retrieval_Time,InterPelletInterval,Poke_Time
+2024-10-09 16:22:39.291,25.78,31.01,1.16.3,FR1,20,4.20,NaN,1,Right,Left,9,73,6,0,NaN,NaN,0.41
+2024-10-09 16:22:54.064,25.79,31.04,1.16.3,FR1,20,4.20,NaN,1,Left,Left,10,73,6,0,NaN,NaN,0.07
+2024-10-09 16:22:58.150,25.78,31.04,1.16.3,FR1,20,4.20,NaN,1,PelletInWell,Left,10,73,6,0,NaN,NaN,NaN
+2024-10-09 16:23:00.090,25.79,31.02,1.16.3,FR1,20,4.20,NaN,1,RightWithPellet,Left,10,74,6,0,NaN,NaN,0.31
+2024-10-09 16:23:00.630,25.80,31.03,1.16.3,FR1,20,4.20,3,1,Pellet,Left,10,74,7,0,2.42,7304,NaN
