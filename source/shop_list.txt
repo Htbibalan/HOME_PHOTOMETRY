@@ -26,3 +26,10 @@ https://www.elfadistrelec.no/en/jumper-cable-of-40-wires-male-to-female-awg22-ve
 
 #### https://www.multicom.no/delock-seriell-adapter-db-25-til/cat-p/c/p5398359?gad_source=1&gclid=CjwKCAjw8rW2BhAgEiwAoRO5rKDj3SsBziStjbM7XgD4G3ZDbnNtTQQtALRzAGIcXfvrEBEA31QwJhoCIz0QAvD_BwE
 
+
+
+## micro-USB extension
+When mounted, the usb port on feather board of FEDs is very badly accessible,this tiny extension can be plugged in and folded back inside the FED housing -- - so the user can easily plug the USB cable on and off
+
+https://www.amazon.com/Uogw-Micro-USB-Extension-Compatible-Extender/dp/B0CLNST44W/ref=sr_1_12_sspa?crid=2T2GL28DFSUQF&dib=eyJ2IjoiMSJ9.ToT3-_PpHgo8qtZdqoQMA_RmyXm6rntiebAVAt7THINzPbDIxeCftpZySoyK1GaJeZY26zIsTFYda32_0IthTOMxalG1sVhi6l7dpbQTZtIAAegbQhmTqVs8Re8zaWFydS_tD66FhC2EADfzfWHkswVANtIlt0KJgT7VXEkySAhnAKVyMKRxunJ3VUaQDT3ZaAcAWanG9JjlNHgFYxLHJ7A2aLwAGYZ1YsdB2rNlqzk.O1Yd72mzAjQylSQsHVLrKwEAeE-LObh2ErCST5r62MY&dib_tag=se&keywords=micro+usb+extension&qid=1724755350&sprefix=micro+usb+extensio%2Caps%2C215&sr=8-12-spons&sp_csd=d2lkZ2V0TmFtZT1zcF9tdGY&psc=1 
+
