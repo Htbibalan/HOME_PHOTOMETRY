@@ -1,0 +1,110 @@
+To ensure that power management and automatic session logout are fully disabled on your Raspberry Pi, you can follow these steps:
+
+### 1. **Disable Power Management via `xset`**
+You can use `xset` to disable the Display Power Management Signaling (DPMS) and screen blanking. This ensures that the display stays active even if there's no user interaction.
+
+- Open a terminal and run the following commands to disable screen blanking and DPMS:
+
+```bash
+xset s off          # Disable screen saver
+xset -dpms          # Disable DPMS (Energy Star) features
+xset s noblank      # Disable screen blanking
+```
+
+To make these settings persistent (so they apply after reboot), add these commands to your autostart file:
+
+- Open the autostart file:
+
+```bash
+nano ~/.config/lxsession/LXDE-pi/autostart
+```
+
+- Add the following lines at the end of the file:
+
+```bash
+@xset s off
+@xset -dpms
+@xset s noblank
+```
+
+- Save the file (`Ctrl+X`, then `Y`, then `Enter`).
+
+### 2. **Disable Power Management via `lightdm`**
+If you're using the LightDM display manager, you can disable power management features there as well:
+
+- Open the `lightdm.conf` file by typing:
+
+```bash
+sudo nano /etc/lightdm/lightdm.conf
+```
+
+- Find the section `[Seat:*]` and add or modify the following line:
+
+```bash
+xserver-command=X -s 0 -dpms
+```
+
+This prevents the X server from activating screen saver or DPMS (power-saving) features.
+
+- Save the file (`Ctrl+X`, then `Y`, and press `Enter`).
+
+### 3. **Disable Automatic Session Logout**
+You can modify the LightDM settings to disable automatic session timeouts:
+
+- Open the session settings file by running:
+
+```bash
+sudo nano /etc/lightdm/lightdm.conf
+```
+
+- Under the `[Seat:*]` section, ensure that there are no session timeout settings like the following. If present, remove or comment them out:
+
+```bash
+session-timeout=0
+```
+
+- You can also check the `idle timeout` settings:
+
+```bash
+idle-timeout=0
+```
+
+This setting disables any idle timeout that could log out the session.
+
+### 4. **Disable System Suspend (Power Management)**
+If the Raspberry Pi is suspending or hibernating due to inactivity (rare, but can happen in certain setups), you can disable suspend mode.
+
+- Open the power management settings:
+
+```bash
+sudo nano /etc/systemd/logind.conf
+```
+
+- Find the following lines and uncomment (remove the `#`) and set the values as shown below:
+
+```bash
+#HandleLidSwitch=ignore
+#HandleLidSwitchDocked=ignore
+#HandleSuspendKey=ignore
+#HandleHibernateKey=ignore
+#IdleAction=ignore
+```
+
+This disables any automatic suspend, hibernation, or power-saving behavior.
+
+- Save the file (`Ctrl+X`, then `Y`, and press `Enter`).
+
+- Restart the service to apply the changes:
+
+```bash
+sudo systemctl restart systemd-logind
+```
+
+### 5. **Reboot**
+Finally, reboot your Raspberry Pi to apply all changes:
+
+```bash
+sudo reboot
+```
+
+This setup should fully disable power management and automatic session logout, ensuring that your system stays active even if there's no user interaction or if you turn off the screen.
