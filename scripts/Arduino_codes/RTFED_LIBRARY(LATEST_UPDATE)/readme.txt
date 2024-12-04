@@ -1,0 +1,1 @@
+to run RTFED (with or without camera) and the TTL system on raspberry pi, the FEDs should be flashed with these codes
