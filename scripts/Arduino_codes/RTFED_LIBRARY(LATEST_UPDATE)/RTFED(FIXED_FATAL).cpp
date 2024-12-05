@@ -66,8 +66,7 @@ static void outsideRightTriggerHandler(void) {
   pointerToFED3->rightTrigger();
 }
 
-// define a global flag to stop logging data
-bool stopLogging = false;
+
 
 /**************************************************************************************************************************************************
                                                                                                             Main loop
@@ -595,6 +594,24 @@ void FED3::BNC(int DELAY_MS, int loops) {
     delay(DELAY_MS);
   }
 }
+
+
+void FED3::disableInputs() {
+    // Disable motor driver
+    digitalWrite(MOTOR_ENABLE, LOW);
+    // Detach interrupts
+    detachInterrupt(digitalPinToInterrupt(PELLET_WELL));
+    detachInterrupt(digitalPinToInterrupt(LEFT_POKE));
+    detachInterrupt(digitalPinToInterrupt(RIGHT_POKE));
+    // Set all other control pins to LOW
+    // digitalWrite(A2, LOW);
+    // digitalWrite(A3, LOW);
+    // digitalWrite(A4, LOW);
+    // digitalWrite(A5, LOW);
+    // digitalWrite(BNC_OUT, LOW);
+    Serial.println("Inputs Disabled and Logging Stopped"); // Added for debugging
+}
+
 
 //Simple function for generating a beeping pattern when alarm needed
 void FED3::Alarm() {
@@ -1646,6 +1663,11 @@ void FED3::begin() {
   CreateDataFile();
   writeHeader();
   EndTime = 0;
+
+  //reset flags
+  stopLogging = false;
+  jamOccurred = false;
+  
   
   // Disable sleep mode to keep the USB Serial connection active
   disableSleep();
