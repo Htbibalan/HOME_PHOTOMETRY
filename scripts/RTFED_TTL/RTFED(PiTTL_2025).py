@@ -546,7 +546,7 @@ class FED3MonitorApp:
         if self.recording_label is None:
             self.recording_label = self.canvas.create_text(40, 70, text="RECORDING", font=("Cascadia Code", 10), anchor="n")
         if self.session_timer_text is None:
-            self.session_timer_text = self.canvas.create_text(40, 90, text="Time: 00:00:00", font=("Cascadia Code", 10), anchor="n")
+            self.session_timer_text = self.canvas.create_text(40, 90, text="Time: 00:00:00", font=("Cascadia Code", 7), anchor="n")
 
     def update_session_timer(self):
         if self.session_start_time is None:
@@ -554,7 +554,7 @@ class FED3MonitorApp:
         elapsed = datetime.datetime.now() - self.session_start_time
         hours, rem = divmod(int(elapsed.total_seconds()), 3600)
         minutes, seconds = divmod(rem, 60)
-        timer_str = f"Session Time: {hours:02d}:{minutes:02d}:{seconds:02d}"
+        timer_str = f" Time: {hours:02d}:{minutes:02d}:{seconds:02d}"
         if self.session_timer_text is not None:
             self.canvas.itemconfig(self.session_timer_text, text=timer_str)
         if self.logging_active:
