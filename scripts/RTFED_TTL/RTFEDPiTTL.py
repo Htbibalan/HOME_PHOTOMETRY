@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[ ]:
+# In[1]:
 
 
 #!/usr/bin/env python3
@@ -247,7 +247,7 @@ class FED3MonitorApp:
             "0 - Free Feeding", "1 - FR1", "2 - FR3", "3 - FR5",
             "4 - Progressive Ratio", "5 - Extinction", "6 - Light Tracking",
             "7 - FR1 (Reversed)", "8 - PR (Reversed)", "9 - Self-Stim",
-            "10 - Self-Stim (Reversed)", "11 - Timed Feeding", "12 - ClosedEconomy_PR1"
+            "10 - Self-Stim (Reversed)", "11 - Timed Feeding", "12 - ClosedEconomy_PR2", "13 - Probabilistic Reversal", "14 - Bandit8020", "15 - DetBandit"
         ]
 
         self.port_serial_objects = {}  # Mapping: port_identifier -> serial.Serial instance
@@ -302,7 +302,7 @@ class FED3MonitorApp:
             "3) If needed, you can select which FED you would like to change the mode on, after setting the mode, the selected device(s) would be restarted (one after the other). Press Identify Devices again to confirm.\n"
             "4) If you need to restart a FED3 after pressing START (e.g fixing a jam), do it one at a time and reconnect the same device to the same port, no need to Identify devices again.\n"
             "5) Ports are assigned based on the initial detection when the program started, i.e. the order the FED3s are switched on\n"
-            "6) In case of noticing abnormal and unexpected behaviour from your Raspberry Pi, e.g. an open window closing itself, etc, we recommend to restart your system!\n"
+            "6) In case of noticing abnormal and unexpected behaviour from your Raspberry Pi, e.g. an open window closing itself, etc, we recommend restarting your system!\n"
             "7) GPIO pin mapping for Raspberry Pi 4B is:\n\n"
             "Port 1: Left=17, Right=27, Pellet=22\n"
             "Port 2: Left=10, Right=9,  Pellet=11\n"
