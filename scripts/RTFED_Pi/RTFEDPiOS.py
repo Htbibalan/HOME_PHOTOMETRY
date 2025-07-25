@@ -24,7 +24,7 @@ column_headers = [
     "MM/DD/YYYY hh:mm:ss.SSS", "Temp", "Humidity", "Library_Version", "Session_type",
     "Device_Number", "Battery_Voltage", "Motor_Turns", "FR", "Event", "Active_Poke",
     "Left_Poke_Count", "Right_Poke_Count", "Pellet_Count", "Block_Pellet_Count",
-    "Retrieval_Time", "InterPelletInterval", "Poke_Time"
+    "Retrieval_Time", "InterPelletInterval", "Poke_Time","PelletsOrTrialToSwitch", "Prob_left", "Prob_right", "High_prob_poke"  
 ]
 
 # Google Sheets Scope
