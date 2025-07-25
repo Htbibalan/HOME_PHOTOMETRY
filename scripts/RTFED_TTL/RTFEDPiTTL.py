@@ -58,7 +58,7 @@ column_headers = [
     "Timestamp", "Temp", "Humidity", "Library_Version", "Session_type",
     "Device_Number", "Battery_Voltage", "Motor_Turns", "FR", "Event", "Active_Poke",
     "Left_Poke_Count", "Right_Poke_Count", "Pellet_Count", "Block_Pellet_Count",
-    "Retrieval_Time", "InterPelletInterval", "Poke_Time"
+    "Retrieval_Time", "InterPelletInterval", "Poke_Time","PelletsOrTrialToSwitch", "Prob_left", "Prob_right", "High_prob_poke" 
 ]
 
 # Global known devices dictionary maps serial port path to a fixed port identifier (e.g. "Port 1")
